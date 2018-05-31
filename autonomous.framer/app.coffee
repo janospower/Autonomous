@@ -18,15 +18,17 @@ recognizer.interimResults = false
 recognizing = false
 recognizer.onstart = (event) ->
 	recognizing = true
-	synthActive.animate
-		opacity: 1
+	vcircle.animate
+		borderColor: "red"
+		#scale: 1
 		options:
 			time: 0.3
 
 recognizer.onend = (event) ->
 	recognizing = false
-	synthActive.animate
-		opacity: 0
+	vcircle.animate
+		borderColor: "white"
+		#scale: 0.7
 		options:
 			time: 0.2
 
@@ -90,7 +92,7 @@ setSprache = (s) ->
 		synth.lang = 'de-DE'
 		toVocab = ['nach', 'zum', 'zu', 'bis', 'in']
 		rstop = /\b(?:stop|stopp|abbruch|halt|bremsen|brems|bleib|anhalten|pause)\b/i
-		rstart = /\b(?:phallus|go|fahr|weiter|start|los|losfahren)\b/i
+		rstart = /\b(?:phallus|Balos|go|fahr|weiter|start|los|losfahren)\b/i
 		rnach = /\b(?:nach|zum|zu|bis|in)\b/i
 		whereto = 'Guten Tag! Wohin würden Sie gerne Fahren?'
 		nach = /\b(?:nach|zum|zu|bis|in)\b/i
@@ -311,12 +313,13 @@ startListening()
 Screen.backgroundColor = "#2f2f2f"
 
 vcircle = new Layer
-	width: 96
-	height: 96
-	x: (pwidth/2)-48
-	y: pheight-130
+	width: 70
+	height: 70
+	x: 150 #(pwidth/2)-48
+	y: 400 #pheight-130
 	borderRadius: 200
 	borderWidth: 8
+	scale: 0.7
 	borderColor: "white"
 	backgroundColor: ""
 	opacity: 1.0
