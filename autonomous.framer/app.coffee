@@ -313,11 +313,11 @@ Screen.backgroundColor = "#2f2f2f"
 vcircle = new Layer
 	width: 96
 	height: 96
-	x: Align.center
-	y: Align.center
+	x: (pwidth/2)-48
+	y: pheight-130
 	borderRadius: 200
 	borderWidth: 8
-	borderColor: "rgba(50,205,253,1)"
+	borderColor: "white"
 	backgroundColor: ""
 	opacity: 1.0
 
