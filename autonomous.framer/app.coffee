@@ -43,7 +43,7 @@ videoh = 360
 videofactor = 4
 
 tourVideo = new VideoLayer
-	video: "videos/IMG_1622.m4v"
+	video: "videos/htwberlin.mov"
 	y: 0
 	width: pwidth
 	height: pheight
@@ -233,3 +233,46 @@ cockpit = new Layer
 	y: pheight-cockpitHeight
 	width: pwidth
 	height: cockpitHeight
+
+
+respondToVoice = (layer) ->
+	
+	currentScale = Utils.modulate(inputVolume, [0, MAX_VOLUME], [layer.states.inactive.scale, layer.states.active.scale], true)
+	currentBorderWidth = Utils.modulate(inputVolume, [0, MAX_VOLUME], [layer.states.inactive.borderWidth, layer.states.active.borderWidth], true)
+	
+	layerAnimation = new Animation layer,
+		scale: currentScale
+		borderWidth: currentBorderWidth
+		options: 
+			curve: Spring(damping: 0.91)
+			time: 0.30
+			
+	layerAnimation.start()
+	layerAnimation.onAnimationEnd ->
+		layerAnimation.start()
+
+startListening = (vcircle) ->
+	Utils.interval 0.3, ->
+		respondToVoice(vcircle)
+startListening(vcircle)
+
+vcircle = new Layer
+	width: 96
+	height: 96
+	x: Align.center
+	y: Align.center
+	borderRadius: 200
+	borderWidth: 8
+	borderColor: "rgba(50,205,253,1)"
+	backgroundColor: ""
+	opacity: 1.0
+
+vcircle.states =
+	inactive:
+		scale: 1
+		borderWidth: 12
+	active:
+		scale: 1.75
+		borderWidth: 2
+
+vcircle.stateSwitch("inactive")

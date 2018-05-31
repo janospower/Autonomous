@@ -26,5 +26,7 @@ sounds/Error1.m4a
 sounds/Notification1.m4a
 sounds/Notification3.m4a
 sounds/Notification4.m4a
+videos/htwberlin.mov
+videos/Sue.mov
 videos/IMG_1622.m4v
 modules/myModule.coffee
