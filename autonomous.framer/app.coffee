@@ -27,7 +27,7 @@ recognizer.onstart = (event) ->
 recognizer.onend = (event) ->
 	recognizing = false
 	vcircle.animate
-		borderColor: "green"
+		borderColor: ccolor
 		#scale: 0.7
 		options:
 			time: 0.3
@@ -71,6 +71,7 @@ rcancel = null
 rbegin = null
 rsorry = null
 rsorrycont = null
+ccolor = null
 
 #default
 sprache = "de"
@@ -148,6 +149,7 @@ Events.wrap(window).addEventListener "keydown", (event) ->
 	#recognizer.start()
 
 recognizer.onresult = (event) ->
+	ccolor = "green"
 	result = event.results[event.resultIndex]
 	transcript = result[0].transcript
 	print transcript
@@ -169,7 +171,7 @@ recognizer.onresult = (event) ->
 		#transcript.replace /nach/, "Wir kommen in 5 Minuten an bei "
 		when stop then sprich(rcancel, false); car.animateStop(); tourVideo.player.pause()
 		when start then sprich(rbegin, false); caranimation.start(); tourVideo.player.play()
-		else noCompSound.play(); sprich(noComp, false) #true?
+		else noCompSound.play(); sprich(noComp, false); ccolor = "yellow" #true?
 	return
 
 
@@ -315,8 +317,6 @@ startListening = () ->
 startListening()
 
 # Layer Setup
-
-Screen.backgroundColor = "#2f2f2f"
 
 vcircle = new Layer
 	width: 70
