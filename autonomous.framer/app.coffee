@@ -42,6 +42,7 @@ startListen = () ->
 	if !recognizing
 		recognizer.abort()
 		recognizer.start()
+		listenSound.play()
 
 # Speech Synthesis
 synth = window.speechSynthesis
@@ -142,7 +143,6 @@ Events.wrap(window).addEventListener "keydown", (event) ->
 		sprich(whereto, true)
 	if event.keyCode is 76 #L Key
 		startListen()
-		listenSound.play()
 		
 	#recognizer.stop()
 	#recognizer.start()
@@ -169,7 +169,7 @@ recognizer.onresult = (event) ->
 		#transcript.replace /nach/, "Wir kommen in 5 Minuten an bei "
 		when stop then sprich(rcancel, false); car.animateStop(); tourVideo.player.pause()
 		when start then sprich(rbegin, false); caranimation.start(); tourVideo.player.play()
-		else noCompSound.play(); sprich(noComp, true)
+		else noCompSound.play(); sprich(noComp, false) #true?
 	return
 
 
