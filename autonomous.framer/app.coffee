@@ -234,7 +234,56 @@ cockpit = new Layer
 	width: pwidth
 	height: cockpitHeight
 
+# Handling Voice
 
+inputVolume = undefined
+UPDATE_FREQUENCY = 0.15
+
+# you might want to change that for different environments
+MAX_VOLUME = 10
+
+# get the volume value
+getVolume = (input) ->
+	sum = 0.0
+	for i in [0...input.length]
+		sum += input[i] * input[i]
+	volume = Math.sqrt(sum / input.length) * 100
+	return volume.toFixed(2)
+
+# handle success in case we were able to get access to the mic
+handleSuccess = (stream) ->
+	audioCtx = new AudioContext
+	source = audioCtx.createMediaStreamSource(stream)
+	scriptNode = audioCtx.createScriptProcessor(2048, 1, 1);
+	
+	source.connect(scriptNode)
+	scriptNode.connect(audioCtx.destination)
+	
+	scriptNode.onaudioprocess = (event) ->
+		input = event.inputBuffer.getChannelData(0)
+		inputVolume = getVolume(input)
+	
+	return
+
+# print error in case of error
+handleFailure = (error) ->
+	print(error)
+	return
+
+# set the constraints
+constraints = 
+	audio: true
+	video: false
+
+# check whether or not the browser supports Web Audio API
+# if yes, try to get access to the mic
+if navigator.mediaDevices
+	console.log('getUserMedia supported')
+	navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleFailure)
+else 
+	console.log('getUserMedia is not supported')
+
+# making layer from the startListening function located below respond to voice
 respondToVoice = (layer) ->
 	
 	currentScale = Utils.modulate(inputVolume, [0, MAX_VOLUME], [layer.states.inactive.scale, layer.states.active.scale], true)
@@ -251,10 +300,15 @@ respondToVoice = (layer) ->
 	layerAnimation.onAnimationEnd ->
 		layerAnimation.start()
 
-startListening = (vcircle) ->
-	Utils.interval 0.3, ->
+startListening = () ->
+	Utils.interval UPDATE_FREQUENCY, ->
 		respondToVoice(vcircle)
-startListening(vcircle)
+		
+startListening()
+
+# Layer Setup
+
+Screen.backgroundColor = "#2f2f2f"
 
 vcircle = new Layer
 	width: 96
