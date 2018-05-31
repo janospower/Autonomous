@@ -27,10 +27,16 @@ recognizer.onstart = (event) ->
 recognizer.onend = (event) ->
 	recognizing = false
 	vcircle.animate
-		borderColor: "white"
+		borderColor: "green"
 		#scale: 0.7
 		options:
-			time: 0.2
+			time: 0.3
+	Utils.delay 1, ->
+		vcircle.animate
+			borderColor: "white"
+			#scale: 0.7
+			options:
+				time: 0.3
 
 startListen = () ->
 	if !recognizing
