@@ -21,7 +21,7 @@ recognizer.onstart = (event) ->
 	synthActive.animate
 		opacity: 1
 		options:
-			time: 0.2
+			time: 0.3
 
 recognizer.onend = (event) ->
 	recognizing = false
