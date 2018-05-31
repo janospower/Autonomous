@@ -161,7 +161,7 @@ recognizer.onresult = (event) ->
 	nachInvalidDest = nach && !validDestK && !validDestSE
 	listenedSound.play()
 	grade = switch
-		when validDestK then sprich(toUni, false)
+		when validDestK then sprich(toUni, false); tourVideo.player.play()
 		when de then setSprache("de"); sprich("OK, die sprache wurde auf deutsch gewechselt", false)
 		when en then setSprache("en"); sprich("OK, the language has been set to english", false)
 		when validDestSE then sprich(toOffice, false)
