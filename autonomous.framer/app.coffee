@@ -242,6 +242,7 @@ tint = new Layer
 	y: 0
 	width: pwidth
 	height: pheight
+	opacity: 0
 
 tint.states =
 	tinted:
@@ -257,7 +258,7 @@ tintit = new Animation tint,
 
 untintit = new Animation tint,
 	tint.states.untinted
-untintit.start()
+tintit.start()
 
 cockpitHeight = 385
 cockpit = new Layer
@@ -266,6 +267,21 @@ cockpit = new Layer
 	y: pheight-cockpitHeight
 	width: pwidth
 	height: cockpitHeight
+
+gridp = 90
+
+welcometext.bringToFront()
+welcometext.x = gridp
+welcometext.y = -welcometext.height
+
+updown = (layer) ->
+	layer.animate
+		y: gridp
+		options:
+			ease: "ease"
+			time: 0.5
+updown(welcometext)
+
 
 # Handling Voice
 
