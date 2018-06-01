@@ -74,7 +74,7 @@ rsorrycont = null
 ccolor = null
 
 #default
-sprache = "de"
+sprache = "en"
 #sprache = "de"
 setSprache = (s) ->
 	sprache = s
@@ -242,10 +242,22 @@ Events.wrap(tourVideo.player).on "pause", ->
 checkend = (time,end) ->
 	if time > end
 		htwbg.opacity = 1
+		htwi.opacity = 1
 		ldown(htwinfo)
+		tintit.start()
+		htwi.bringToFront()
+		sprich("Wir haben das Ziel erreicht. Möchten sie mehr darüber erfahren?",true)
 
 htwbg = new Layer
 	image: "images/htwbg.png"
+	x: 0
+	y: 0
+	width: pwidth
+	height: pheight
+	opacity: 0
+
+htwi = new Layer
+	image: "images/htwi.png"
 	x: 0
 	y: 0
 	width: pwidth
@@ -288,6 +300,10 @@ gridp = 90
 welcometext.bringToFront()
 welcometext.x = gridp
 welcometext.y = -welcometext.height
+
+htwinfo.bringToFront()
+htwinfo.x = gridp
+htwinfo.y = -htwinfo.height
 
 ldown = (layer) ->
 	layer.animate

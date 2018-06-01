@@ -1,7 +1,11 @@
 app.coffee
 index.html
+images/design/CwOUJBqnbii0r0c4FO03VAKfjOxEL8dgp1omdhovuZ5gNKQaV9MazO0hlMvXgWgA9PLrijVfjpnE3YaKOHA.png
+images/design/zOIfDl9KqVDNgSsfAWVNANqMp5e1pm5y5yltjNqDKvFbRYvqqqPgOPt8CQtdaECaHK9dPVhsCFLr5xDb7XyTg.png
+images/design/yE7ufsCJjSQDBNRvUmZ1LAHu57t4odDyYU0UlcejZiqv5RWaupb0zxX1cU01mL7Gxd3dxxEbLN3S1lvP6nYA.png
 images/car_asset.png
 images/htwbg.png
+images/htwi.png
 images/tint.png
 framer/preview.png
 framer/manifest.txt
