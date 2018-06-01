@@ -103,7 +103,7 @@ setSprache = (s) ->
 		synth.lang = 'de-DE'
 		toVocab = ['nach', 'zum', 'zu', 'bis', 'in']
 		rstop = /\b(?:stop|stopp|abbruch|halt|bremsen|brems|bleib|anhalten|pause)\b/i
-		rstart = /\b(?:phallus|Balos|go|fahr|weiter|start|los|losfahren)\b/i
+		rstart = /\b(?:phallus|Balos|go|weiterfahren|fahr|weiter|start|los|losfahren)\b/i
 		rnach = /\b(?:nach|zum|zu|bis|in)\b/i
 		whereto = 'Hallo Janosch, Wilkommen zur A.R. Stadt rundfahrt. Wir befinden uns momentan in Berlin Oberschöneweide! Wohin würdest du gerne Fahren?'
 		nach = /\b(?:nach|zum|zu|bis|in)\b/i
@@ -153,6 +153,12 @@ Events.wrap(window).addEventListener "keydown", (event) ->
 	#recognizer.stop()
 	#recognizer.start()
 
+tr = new TextLayer
+	text: "transcript"
+	color: 'white'
+	x: gridp
+	y: pheight-gridp
+
 recognizer.onresult = (event) ->
 	ccolor = "#7ED321"
 	result = event.results[event.resultIndex]
@@ -163,6 +169,7 @@ recognizer.onresult = (event) ->
 	nach = rnach.test(transcript)
 	info = /\b(?:info|informationen|anhören|hören|zusätzliche|lies|vor|vorlesen)\b/i.test(transcript)
 	bild = /\b(?:bild|bilder|groß|größer|anzeigen|zeig)\b/i.test(transcript)
+	rbild = /\b(?:klein|kleiner)\b/i.test(transcript)
 	validDestK = toK.test(transcript)
 	validDestSE = toSE.test(transcript)
 	de = /\b(?:deutsch|german)\b/i.test(transcript)
@@ -178,12 +185,13 @@ recognizer.onresult = (event) ->
 		#transcript.replace /nach/, "Wir kommen in 5 Minuten an bei "
 		when stop then sprich(rcancel, false); car.animateStop(); tourVideo.player.pause()
 		when start then sprich(rbegin, false); caranimation.start(); tourVideo.player.play()
-		when htwframe && info then sprich("Vor etwas mehr als hundert Jahren war Oberschöneweide eines der Gründungszentren der Berliner Industrie. Hier an der Rathenaustraße stiegen täglich Tausende von Arbeitern aus den Straßenbahnen, strömten in die dicht gedrängten, mit gelbem Klinker versehenen Fabrikanlagen entlang der Wilhelminenhofstraße und fertigten Kabel, montierten Autos oder entwarfen Sendeanlagen.", false)
+		when htwframe && info then sprich("Vor etwas mehr als hundert Jahren war Oberschöneweide eines der Gründungszentren der Berliner Industrie.", false)
 		when htwframe && bild then karte.visible = true; karteanimation.start(); karte.bringToFront(); karte.parent
+		when htwframe && rbild then rkarteanimation.start()
 		else noCompSound.play(); sprich(noComp, false); ccolor = "#D0021B" #true?
 	return
 
-#Heute steigen allerdings hauptsächliche Studenten aus den Trams oder dem Schienenersatzverkehr. Die HTW die Hochschule für Technik und Wirtschaft, hat hier 2009 den Campus Wilhelminenhof eröffnet. Der Campus befindet sich auf einem der bedeutendsten Industrieareale Berlins, dem ehemaligen Kabelwerk Oberspree. Das Gelände wurde ursprünglich von der AEG aufgebaut und genutzt, zu Zeiten der DDR werden die Gebäude Teil der wichtigen Kombinate VEB KWO. Ab der Wende wird hier jedoch nicht mehr produziert und Oberschöneweide verliert an Bedeutung.
+#Hier an der Rathenaustraße stiegen täglich Tausende von Arbeitern aus den Straßenbahnenin die Fabrikanlagen entlang der WilhelminenhofstraßeHeute steigen allerdings hauptsächliche Studenten aus den Trams oder dem Schienenersatzverkehr. Die HTW die Hochschule für Technik und Wirtschaft, hat hier 2009 den Campus Wilhelminenhof eröffnet. Der Campus befindet sich auf einem der bedeutendsten Industrieareale Berlins, dem ehemaligen Kabelwerk Oberspree. Das Gelände wurde ursprünglich von der AEG aufgebaut und genutzt, zu Zeiten der DDR werden die Gebäude Teil der wichtigen Kombinate VEB KWO. Ab der Wende wird hier jedoch nicht mehr produziert und Oberschöneweide verliert an Bedeutung.
 
 synthActive = new Layer
 	width: 20
@@ -209,9 +217,20 @@ karte.y = 340
 karte.originX = 0
 karte.originY = 0
 karteanimation = new Animation karte,
-	x: 500
-	y: 0
-	scale: 8
+	x: 400
+	y: 90
+	scale: 6
+	opacity: 1
+	#height: 360
+	options:
+		curve: "ease"
+		time: 0.6
+
+rkarteanimation = new Animation karte,
+	x: 195
+	y: 340
+	scale: 1
+	opacity: 0
 	#height: 360
 	options:
 		curve: "ease"
