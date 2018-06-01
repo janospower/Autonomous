@@ -261,7 +261,7 @@
             "bottom" : null,
             "brightness" : 100,
             "brightnessEnabled" : 0,
-            "centerAnchorX" : 0.5,
+            "centerAnchorX" : 0.51518691588785048,
             "centerAnchorY" : 0.12121212121212122,
             "constraintsLocked" : false,
             "contrast" : 100,
@@ -311,37 +311,37 @@
                   ],
                   "inlineStyleRanges" : [
                     {
-                      "length" : 41,
+                      "length" : 42,
                       "offset" : 0,
                       "style" : "FONT:SFProText-Medium"
                     },
                     {
-                      "length" : 41,
+                      "length" : 42,
                       "offset" : 0,
                       "style" : "COLOR:rgb(255, 255, 255)"
                     },
                     {
-                      "length" : 41,
+                      "length" : 42,
                       "offset" : 0,
                       "style" : "SIZE:20"
                     },
                     {
-                      "length" : 41,
+                      "length" : 42,
                       "offset" : 0,
                       "style" : "ALIGN:left"
                     }
                   ],
                   "key" : "5vm8g",
-                  "text" : "Guten Tag! Wohin würden Sie gerne Fahren?",
+                  "text" : "Guten Tag! Wohin möchtest du gerne Fahren?",
                   "type" : "unstyled"
                 }
               ],
               "cached" : {
-                "html" : "<span data-offset-key=\"5vm8g-0-0\" style=\"tab-size:4;font-weight:400;font-family:&quot;SFProText-Medium&quot;, serif;-webkit-text-fill-color:rgb(255, 255, 255);font-size:20px;letter-spacing:0px;line-height:1.2\"><span data-text=\"true\">Guten Tag! Wohin würden Sie gerne Fahren?<\/span><\/span>",
+                "html" : "<span data-offset-key=\"5vm8g-0-0\" style=\"tab-size:4;font-weight:400;font-family:&quot;SFProText-Medium&quot;, serif;-webkit-text-fill-color:rgb(255, 255, 255);font-size:20px;letter-spacing:0px;line-height:1.2\"><span data-text=\"true\">Guten Tag! Wohin möchtest du gerne Fahren?<\/span><\/span>",
                 "os" : "10_13",
                 "size" : {
                   "height" : 24,
-                  "width" : 428
+                  "width" : 441
                 },
                 "width" : 0
               },
@@ -352,7 +352,7 @@
             "targetName" : null,
             "top" : 0,
             "visible" : true,
-            "width" : 428,
+            "width" : 441,
             "widthFactor" : null
           },
           {

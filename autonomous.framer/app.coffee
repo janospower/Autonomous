@@ -102,12 +102,12 @@ setSprache = (s) ->
 		rstop = /\b(?:stop|stopp|abbruch|halt|bremsen|brems|bleib|anhalten|pause)\b/i
 		rstart = /\b(?:phallus|Balos|go|fahr|weiter|start|los|losfahren)\b/i
 		rnach = /\b(?:nach|zum|zu|bis|in)\b/i
-		whereto = 'Guten Tag! Wohin würden Sie gerne Fahren?'
+		whereto = 'Hallo Janosch, Wilkommen zur A.R. Stadtrundfahrt. Wir befinden uns momentan in Berlin Oberschöneweide! Wohin würdest du gerne Fahren?'
 		nach = /\b(?:nach|zum|zu|bis|in)\b/i
-		toUni = 'Ok, es kann Losgehen zum H.T.W. Kommunikationsdesign Gebäude!'
+		toUni = 'Ok, es kann Losgehen zum H.T.W. Kommunikationsdesign Gebäude! die Fahrt wird circa 5 Minuten dauern.'
 		toK = /\b(?:Kommunikationsdesign|Gebäude|Campus|Wilhelminenhof|Kommunikation|design)\b/i
 		toSE = /\b(?:sehen|ernten|Büro)\b/i
-		toOffice = 'Ok, es kann Losgehen zum sehen und Ernten Büro!'
+		toOffice = 'Ok, es kann Losgehen zum sehen und Ernten Büro! die Fahrt wird circa 5 Minuten dauern.'
 		noComp = 'das hab ich leider nicht verstanden'
 		rcancel = "Die Fahrt wurde abgebrochen!"
 		rbegin = "OK, es kann losgehen!"
@@ -142,6 +142,8 @@ Events.wrap(window).addEventListener "keydown", (event) ->
 	#print event.keyCode
 	if event.keyCode is 32 #Space bar
 		sprich(whereto, true)
+		ldown(welcometext)
+		tintit.start()
 	if event.keyCode is 76 #L Key
 		startListen()
 		
@@ -152,7 +154,7 @@ recognizer.onresult = (event) ->
 	ccolor = "#7ED321"
 	result = event.results[event.resultIndex]
 	transcript = result[0].transcript
-	print transcript
+	#print transcript
 	start = rstart.test(transcript)
 	stop = rstop.test(transcript)
 	nach = rnach.test(transcript)
@@ -163,7 +165,7 @@ recognizer.onresult = (event) ->
 	nachInvalidDest = nach && !validDestK && !validDestSE
 	listenedSound.play()
 	grade = switch
-		when validDestK then sprich(toUni, false); tourVideo.player.play()
+		when validDestK then sprich(toUni, false); tourVideo.player.play(); lup(welcometext); untintit.start()
 		when de then setSprache("de"); sprich("OK, die sprache wurde auf deutsch gewechselt", false)
 		when en then setSprache("en"); sprich("OK, the language has been set to english", false)
 		when validDestSE then sprich(toOffice, false)
@@ -191,6 +193,7 @@ car = new Layer
 	y: 10
 	x: 500
 	html: "🚗 "
+	opacity: 0
  
 caranimation = new Animation car,
 	x: 0
@@ -234,7 +237,7 @@ car.onClick ->
 	#tourVideo.player.play()
 
 Events.wrap(tourVideo.player).on "pause", ->
-	print "Video paused"
+	#print "Video paused"
 
 tint = new Layer
 	image: "images/tint.png"
@@ -258,7 +261,6 @@ tintit = new Animation tint,
 
 untintit = new Animation tint,
 	tint.states.untinted
-tintit.start()
 
 cockpitHeight = 385
 cockpit = new Layer
@@ -274,13 +276,20 @@ welcometext.bringToFront()
 welcometext.x = gridp
 welcometext.y = -welcometext.height
 
-updown = (layer) ->
+ldown = (layer) ->
 	layer.animate
 		y: gridp
 		options:
 			ease: "ease"
 			time: 0.5
-updown(welcometext)
+			curve: Spring(damping: 0.5)
+
+lup = (layer) ->
+	layer.animate
+		y: -layer.height
+		options:
+			time: 0.4
+
 
 
 # Handling Voice
@@ -316,7 +325,7 @@ handleSuccess = (stream) ->
 
 # print error in case of error
 handleFailure = (error) ->
-	print(error)
+	#print(error)
 	return
 
 # set the constraints
