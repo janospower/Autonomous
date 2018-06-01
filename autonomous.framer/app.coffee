@@ -73,6 +73,8 @@ rsorry = null
 rsorrycont = null
 ccolor = null
 
+htwframe = false
+
 #default
 sprache = "en"
 #sprache = "de"
@@ -158,6 +160,8 @@ recognizer.onresult = (event) ->
 	start = rstart.test(transcript)
 	stop = rstop.test(transcript)
 	nach = rnach.test(transcript)
+	info = /\b(?:info|informationen|anhören|hören|zusätzliche|lies|vor|vorlesen)\b/i.test(transcript)
+	bild = /\b(?:bild|bilder|ansehen|zeigen|groß|größer)\b/i.test(transcript)
 	validDestK = toK.test(transcript)
 	validDestSE = toSE.test(transcript)
 	de = /\b(?:deutsch|german)\b/i.test(transcript)
@@ -173,6 +177,8 @@ recognizer.onresult = (event) ->
 		#transcript.replace /nach/, "Wir kommen in 5 Minuten an bei "
 		when stop then sprich(rcancel, false); car.animateStop(); tourVideo.player.pause()
 		when start then sprich(rbegin, false); caranimation.start(); tourVideo.player.play()
+		when htwframe && info then sprich("Vor etwas mehr als hundert Jahren war Oberschöneweide eines der Gründungszentren der Berliner Industrie. Hier an der Rathenaustraße stiegen täglich Tausende von Arbeitern aus den Straßenbahnen, strömten in die dicht gedrängten, mit gelbem Klinker versehenen Fabrikanlagen entlang der Wilhelminenhofstraße und fertigten Kabel, montierten Autos oder entwarfen Sendeanlagen. Heute steigen allerdings hauptsächliche Studenten aus den Trams oder dem Schienenersatzverkehr. Die HTW die Hochschule für Technik und Wirtschaft, hat hier 2009 den Campus Wilhelminenhof eröffnet. Der Campus befindet sich auf einem der bedeutendsten Industrieareale Berlins, dem ehemaligen Kabelwerk Oberspree. Das Gelände wurde ursprünglich von der AEG aufgebaut und genutzt, zu Zeiten der DDR werden die Gebäude Teil der wichtigen Kombinate VEB KWO. Ab der Wende wird hier jedoch nicht mehr produziert und Oberschöneweide verliert an Bedeutung.", false)
+		when htwinfo && bild then sprich("bild anzeigen",false)
 		else noCompSound.play(); sprich(noComp, false); ccolor = "#D0021B" #true?
 	return
 
@@ -242,6 +248,7 @@ Events.wrap(tourVideo.player).on "pause", ->
 checkend = (time,end) ->
 	if time > end
 		htwbg.opacity = 1
+		htwframe = true
 		htwi.opacity = 1
 		ldown(htwinfo)
 		tintit.start()
