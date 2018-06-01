@@ -1,6 +1,7 @@
 app.coffee
 index.html
 images/car_asset.png
+images/tint.png
 framer/preview.png
 framer/manifest.txt
 framer/images/cursor.png

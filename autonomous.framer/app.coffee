@@ -236,6 +236,29 @@ car.onClick ->
 Events.wrap(tourVideo.player).on "pause", ->
 	print "Video paused"
 
+tint = new Layer
+	image: "images/tint.png"
+	x: 0
+	y: 0
+	width: pwidth
+	height: pheight
+
+tint.states =
+	tinted:
+		opacity: 1
+	untinted:
+		opacity: 0.2
+	animationOptions:
+		curve: "ease"
+		time: 0.3
+ 
+tintit = new Animation tint,
+	tint.states.tinted
+
+untintit = new Animation tint,
+	tint.states.untinted
+untintit.start()
+
 cockpitHeight = 385
 cockpit = new Layer
 	image: "images/car_asset.png"
