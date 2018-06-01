@@ -89,7 +89,7 @@ sprache = "en"
 setSprache = (s) ->
 	sprache = s
 	if s == "en"
-		recognizer.lang = 'en-US'
+		recognizer.lang = 'de-DE' #en-US
 		synth.lang = 'en-US'
 		toVocab = ['to', 'towards', 'till', 'into', 'in']
 		rstop = /\b(?:stop|stopp|cancel|break|stay|pause)\b/i
@@ -192,9 +192,9 @@ recognizer.onresult = (event) ->
 		when stop then sprich(rcancel, false); car.animateStop(); tourVideo.player.pause()
 		when start then sprich(rbegin, false); caranimation.start(); tourVideo.player.play()
 		when htwframe && info then sprich("Vor etwas mehr als hundert Jahren war Oberschöneweide eines der Gründungszentren der Berliner Industrie.", false)
-		when htwframe && bild then karte.visible = true; karteanimation.start(); karte.bringToFront(); spruch("Dieses Bild ist eine Karte von Oberschöneweide aus dem Jahr 1935",false)
+		when htwframe && bild then karte.visible = true; karteanimation.start(); karte.bringToFront(); sprich("Dieses Bild ist eine Karte von Oberschöneweide aus dem Jahr 1935",false)
 		when htwframe && rbild then rkarteanimation.start()
-		when htwframe && look then spruch("Ok, die Fahrt wurde pausiert. Du kannst jetzt aussteigen und dir das Gebäude genauer anschauen.", false); lookVideo.visible = true; lookVideo.player.play()
+		when htwframe && look then sprich("Ok, die Fahrt wurde pausiert. Du kannst jetzt aussteigen und dir das Gebäude genauer anschauen.", false); lookVideo.visible = true; lookVideo.player.play(); htwi.visible = false; htwbg.visible = false; htwinfo.visible = false
 		else noCompSound.play(); sprich(noComp, false); ccolor = "#D0021B" #true?
 	return
 
