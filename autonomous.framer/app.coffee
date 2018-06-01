@@ -102,7 +102,7 @@ setSprache = (s) ->
 		rstop = /\b(?:stop|stopp|abbruch|halt|bremsen|brems|bleib|anhalten|pause)\b/i
 		rstart = /\b(?:phallus|Balos|go|fahr|weiter|start|los|losfahren)\b/i
 		rnach = /\b(?:nach|zum|zu|bis|in)\b/i
-		whereto = 'Hallo Janosch, Wilkommen zur A.R. Stadtrundfahrt. Wir befinden uns momentan in Berlin Oberschöneweide! Wohin würdest du gerne Fahren?'
+		whereto = 'Hallo Janosch, Wilkommen zur A.R. Stadt rundfahrt. Wir befinden uns momentan in Berlin Oberschöneweide! Wohin würdest du gerne Fahren?'
 		nach = /\b(?:nach|zum|zu|bis|in)\b/i
 		toUni = 'Ok, es kann Losgehen zum H.T.W. Kommunikationsdesign Gebäude! die Fahrt wird circa 5 Minuten dauern.'
 		toK = /\b(?:Kommunikationsdesign|Gebäude|Campus|Wilhelminenhof|Kommunikation|design)\b/i
@@ -110,7 +110,7 @@ setSprache = (s) ->
 		toOffice = 'Ok, es kann Losgehen zum sehen und Ernten Büro! die Fahrt wird circa 5 Minuten dauern.'
 		noComp = 'das hab ich leider nicht verstanden'
 		rcancel = "Die Fahrt wurde abgebrochen!"
-		rbegin = "OK, es kann losgehen!"
+		rbegin = "OK, weiter wie geplant!"
 		rsorry = 'Leider haben wir für'
 		rsorrycont = 'keine Tour im Angebot. Bitte wählen Sie aus Kommunikationsdesign oder dem sehen und ernten Büro'
 
@@ -237,7 +237,20 @@ car.onClick ->
 	#tourVideo.player.play()
 
 Events.wrap(tourVideo.player).on "pause", ->
-	#print "Video paused"
+	checkend(tourVideo.player.currentTime,18)
+
+checkend = (time,end) ->
+	if time > end
+		htwbg.opacity = 1
+		ldown(htwinfo)
+
+htwbg = new Layer
+	image: "images/htwbg.png"
+	x: 0
+	y: 0
+	width: pwidth
+	height: pheight
+	opacity: 0
 
 tint = new Layer
 	image: "images/tint.png"
@@ -289,6 +302,7 @@ lup = (layer) ->
 		y: -layer.height
 		options:
 			time: 0.4
+
 
 
 
