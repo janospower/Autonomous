@@ -102,7 +102,7 @@ setSprache = (s) ->
 		recognizer.lang = 'de-DE'
 		synth.lang = 'de-DE'
 		toVocab = ['nach', 'zum', 'zu', 'bis', 'in']
-		rstop = /\b(?:stop|stopp|abbruch|halt|bremsen|brems|bleib|anhalten|pause)\b/i
+		rstop = /\b(?:stop|stopp|halte|heute|abbruch|halt|bremsen|brems|bleib|anhalten|pause)\b/i
 		rstart = /\b(?:phallus|Balos|go|weiterfahren|fahr|weiter|start|los|losfahren)\b/i
 		rnach = /\b(?:nach|zum|zu|bis|in)\b/i
 		whereto = 'Hallo Janosch, Wilkommen zur A.R. Stadt rundfahrt. Wir befinden uns momentan in Berlin Oberschöneweide! Wohin würdest du gerne Fahren?'
@@ -153,17 +153,15 @@ Events.wrap(window).addEventListener "keydown", (event) ->
 	#recognizer.stop()
 	#recognizer.start()
 
-tr = new TextLayer
-	text: "transcript"
-	color: 'white'
-	x: gridp
-	y: pheight-gridp
+
+
 
 recognizer.onresult = (event) ->
 	ccolor = "#7ED321"
 	result = event.results[event.resultIndex]
 	transcript = result[0].transcript
 	#print transcript
+	tr.text = transcript
 	start = rstart.test(transcript)
 	stop = rstop.test(transcript)
 	nach = rnach.test(transcript)
@@ -362,7 +360,12 @@ lup = (layer) ->
 		options:
 			time: 0.4
 
-
+tr = new TextLayer
+	text: "transcript"
+	color: 'white'
+	fontSize: 20
+tr.x = gridp
+tr.y = pheight-gridp
 
 
 # Handling Voice
