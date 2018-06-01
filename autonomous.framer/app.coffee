@@ -374,8 +374,8 @@ tr = new TextLayer
 	text: "transcript"
 	color: 'white'
 	fontSize: 20
-tr.x = gridp
-tr.y = pheight-gridp
+tr.x = gridp+25
+tr.y = pheight-57
 
 
 # Handling Voice

@@ -2527,6 +2527,15 @@
                   "type" : "unstyled"
                 }
               ],
+              "cached" : {
+                "html" : "<span data-offset-key=\"c26ba-0-0\" style=\"tab-size:4;font-family:&quot;.SFNSDisplay&quot;, serif;-webkit-text-fill-color:rgb(255, 255, 255);font-size:20px;letter-spacing:0px;line-height:1.8\"><span data-text=\"true\">Informationen anhören<\/span><\/span>",
+                "os" : "10_13",
+                "size" : {
+                  "height" : 36,
+                  "width" : 190
+                },
+                "width" : 0
+              },
               "entityMap" : {
 
               }
