@@ -57,6 +57,13 @@ tourVideo = new VideoLayer
 	width: pwidth
 	height: pheight
 
+lookVideo = new VideoLayer
+	video: "videos/stoplook.m4v"
+	y: 0
+	width: pwidth
+	height: pheight
+lookVideo.visible = false
+
 whereto = null
 rstop = null
 rstart = null
@@ -167,6 +174,7 @@ recognizer.onresult = (event) ->
 	nach = rnach.test(transcript)
 	info = /\b(?:info|informationen|anhören|hören|zusätzliche|lies|vor|vorlesen)\b/i.test(transcript)
 	bild = /\b(?:bild|bilder|groß|größer|anzeigen|zeig)\b/i.test(transcript)
+	look = /\b(?:anschauen|aussteigen|raus|hier|schauen)\b/i.test(transcript)
 	rbild = /\b(?:klein|kleiner)\b/i.test(transcript)
 	validDestK = toK.test(transcript)
 	validDestSE = toSE.test(transcript)
@@ -184,8 +192,9 @@ recognizer.onresult = (event) ->
 		when stop then sprich(rcancel, false); car.animateStop(); tourVideo.player.pause()
 		when start then sprich(rbegin, false); caranimation.start(); tourVideo.player.play()
 		when htwframe && info then sprich("Vor etwas mehr als hundert Jahren war Oberschöneweide eines der Gründungszentren der Berliner Industrie.", false)
-		when htwframe && bild then karte.visible = true; karteanimation.start(); karte.bringToFront(); karte.parent
+		when htwframe && bild then karte.visible = true; karteanimation.start(); karte.bringToFront(); spruch("Dieses Bild ist eine Karte von Oberschöneweide aus dem Jahr 1935",false)
 		when htwframe && rbild then rkarteanimation.start()
+		when htwframe && look then spruch("Ok, die Fahrt wurde pausiert. Du kannst jetzt aussteigen und dir das Gebäude genauer anschauen.", false); lookVideo.visible = true; lookVideo.player.play()
 		else noCompSound.play(); sprich(noComp, false); ccolor = "#D0021B" #true?
 	return
 
@@ -268,6 +277,7 @@ caranimation.on Events.AnimationEnd, ->
 
 
 tourVideo.player.volume = 0
+lookVideo.player.volume = 0
 
 car.onClick ->
 	#tourVideo.player.fastSeek(5)
