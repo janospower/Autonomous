@@ -206,10 +206,12 @@ karte.visible = false
 karte.bringToFront()
 karte.x = 195
 karte.y = 340
+karte.originX = 0
+karte.originY = 0
 karteanimation = new Animation karte,
-	x: 500-gridp
+	x: 500
 	y: 0
-	scale: 6
+	scale: 8
 	#height: 360
 	options:
 		curve: "ease"
