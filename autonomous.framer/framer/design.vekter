@@ -1310,7 +1310,7 @@
             "saturateEnabled" : 0,
             "sepia" : 0,
             "sepiaEnabled" : 0,
-            "targetName" : "karte",
+            "targetName" : null,
             "top" : null,
             "visible" : true,
             "width" : 90,
@@ -2527,6 +2527,15 @@
                   "type" : "unstyled"
                 }
               ],
+              "cached" : {
+                "html" : "<span data-offset-key=\"c26ba-0-0\" style=\"tab-size:4;font-family:&quot;.SFNSDisplay&quot;, serif;-webkit-text-fill-color:rgb(255, 255, 255);font-size:20px;letter-spacing:0px;line-height:1.8\"><span data-text=\"true\">Informationen anhören<\/span><\/span>",
+                "os" : "10_13",
+                "size" : {
+                  "height" : 36,
+                  "width" : 190
+                },
+                "width" : 0
+              },
               "entityMap" : {
 
               }
@@ -3106,6 +3115,92 @@
         "top" : 956,
         "visible" : true,
         "width" : 574,
+        "widthFactor" : null
+      },
+      {
+        "__class" : "FrameNode",
+        "aspectRatioLocked" : false,
+        "blendingEnabled" : 0,
+        "blendingMode" : "normal",
+        "blur" : 12,
+        "blurEnabled" : 0,
+        "blurType" : "layer",
+        "borderBottom" : 1,
+        "borderColor" : "#222",
+        "borderEnabled" : 0,
+        "borderLeft" : 1,
+        "borderPerSide" : false,
+        "borderRight" : 1,
+        "borderStyle" : "solid",
+        "borderTop" : 1,
+        "borderWidth" : 1,
+        "bottom" : null,
+        "boxShadows" : [
+
+        ],
+        "brightness" : 100,
+        "brightnessEnabled" : 0,
+        "centerAnchorX" : 0.12369337979094076,
+        "centerAnchorY" : 0.87676056338028174,
+        "children" : [
+
+        ],
+        "clip" : false,
+        "constraintsLocked" : false,
+        "contrast" : 100,
+        "contrastEnabled" : 0,
+        "deviceType" : null,
+        "exportIncludesBackground" : true,
+        "exportOptions" : [
+
+        ],
+        "fillColor" : "rgba(255,255,255,1)",
+        "fillEnabled" : true,
+        "fillGradient" : {
+          "__class" : "LinearGradient",
+          "alpha" : 1,
+          "angle" : 0,
+          "end" : "rgba(0,0,0,0)",
+          "start" : "black"
+        },
+        "fillImage" : "yE7ufsCJjSQDBNRvUmZ1LAHu57t4odDyYU0UlcejZiqv5RWaupb0zxX1cU01mL7Gxd3dxxEbLN3S1lvP6nYA.png",
+        "fillImagePixelHeight" : null,
+        "fillImagePixelWidth" : null,
+        "fillImageResize" : "fill",
+        "fillType" : "image",
+        "grayscale" : 0,
+        "grayScaleEnabled" : 0,
+        "height" : 70,
+        "heightFactor" : null,
+        "hueRotate" : 0,
+        "hueRotateEnabled" : 0,
+        "id" : "icodihfeb",
+        "intrinsicHeight" : null,
+        "intrinsicWidth" : null,
+        "invert" : 0,
+        "invertEnabled" : 0,
+        "left" : 609,
+        "locked" : false,
+        "name" : "karte",
+        "opacity" : 1,
+        "parentid" : "Z9JsNymFJ",
+        "radius" : 0,
+        "radiusBottomLeft" : 0,
+        "radiusBottomRight" : 0,
+        "radiusIsRelative" : false,
+        "radiusPerCorner" : false,
+        "radiusTopLeft" : 0,
+        "radiusTopRight" : 0,
+        "right" : null,
+        "rotation" : 0,
+        "saturate" : 100,
+        "saturateEnabled" : 0,
+        "sepia" : 0,
+        "sepiaEnabled" : 0,
+        "targetName" : "karte",
+        "top" : 1170,
+        "visible" : true,
+        "width" : 90,
         "widthFactor" : null
       }
     ],

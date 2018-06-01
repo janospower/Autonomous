@@ -74,6 +74,7 @@ rsorrycont = null
 ccolor = null
 
 htwframe = false
+beginning = true
 
 #default
 sprache = "en"
@@ -161,7 +162,7 @@ recognizer.onresult = (event) ->
 	stop = rstop.test(transcript)
 	nach = rnach.test(transcript)
 	info = /\b(?:info|informationen|anhören|hören|zusätzliche|lies|vor|vorlesen)\b/i.test(transcript)
-	bild = /\b(?:bild|bilder|ansehen|zeigen|groß|größer)\b/i.test(transcript)
+	bild = /\b(?:bild|bilder|groß|größer|anzeigen|zeig)\b/i.test(transcript)
 	validDestK = toK.test(transcript)
 	validDestSE = toSE.test(transcript)
 	de = /\b(?:deutsch|german)\b/i.test(transcript)
@@ -173,16 +174,16 @@ recognizer.onresult = (event) ->
 		when de then setSprache("de"); sprich("OK, die sprache wurde auf deutsch gewechselt", false)
 		when en then setSprache("en"); sprich("OK, the language has been set to english", false)
 		when validDestSE then sprich(toOffice, false)
-		when nachInvalidDest then sprich((rsorry + checkIndex(toVocab,transcript) + rsorrycont), true)
+		when nachInvalidDest && beginning then sprich((rsorry + checkIndex(toVocab,transcript) + rsorrycont), true)
 		#transcript.replace /nach/, "Wir kommen in 5 Minuten an bei "
 		when stop then sprich(rcancel, false); car.animateStop(); tourVideo.player.pause()
 		when start then sprich(rbegin, false); caranimation.start(); tourVideo.player.play()
-		when htwframe && info then sprich("Vor etwas mehr als hundert Jahren war Oberschöneweide eines der Gründungszentren der Berliner Industrie. Hier an der Rathenaustraße stiegen täglich Tausende von Arbeitern aus den Straßenbahnen, strömten in die dicht gedrängten, mit gelbem Klinker versehenen Fabrikanlagen entlang der Wilhelminenhofstraße und fertigten Kabel, montierten Autos oder entwarfen Sendeanlagen. Heute steigen allerdings hauptsächliche Studenten aus den Trams oder dem Schienenersatzverkehr. Die HTW die Hochschule für Technik und Wirtschaft, hat hier 2009 den Campus Wilhelminenhof eröffnet. Der Campus befindet sich auf einem der bedeutendsten Industrieareale Berlins, dem ehemaligen Kabelwerk Oberspree. Das Gelände wurde ursprünglich von der AEG aufgebaut und genutzt, zu Zeiten der DDR werden die Gebäude Teil der wichtigen Kombinate VEB KWO. Ab der Wende wird hier jedoch nicht mehr produziert und Oberschöneweide verliert an Bedeutung.", false)
-		when htwinfo && bild then sprich("bild anzeigen",false)
+		when htwframe && info then sprich("Vor etwas mehr als hundert Jahren war Oberschöneweide eines der Gründungszentren der Berliner Industrie. Hier an der Rathenaustraße stiegen täglich Tausende von Arbeitern aus den Straßenbahnen, strömten in die dicht gedrängten, mit gelbem Klinker versehenen Fabrikanlagen entlang der Wilhelminenhofstraße und fertigten Kabel, montierten Autos oder entwarfen Sendeanlagen.", false)
+		when htwframe && bild then karteanimation.start(); karte.bringToFront(); karte.parent
 		else noCompSound.play(); sprich(noComp, false); ccolor = "#D0021B" #true?
 	return
 
-
+#Heute steigen allerdings hauptsächliche Studenten aus den Trams oder dem Schienenersatzverkehr. Die HTW die Hochschule für Technik und Wirtschaft, hat hier 2009 den Campus Wilhelminenhof eröffnet. Der Campus befindet sich auf einem der bedeutendsten Industrieareale Berlins, dem ehemaligen Kabelwerk Oberspree. Das Gelände wurde ursprünglich von der AEG aufgebaut und genutzt, zu Zeiten der DDR werden die Gebäude Teil der wichtigen Kombinate VEB KWO. Ab der Wende wird hier jedoch nicht mehr produziert und Oberschöneweide verliert an Bedeutung.
 
 synthActive = new Layer
 	width: 20
@@ -200,7 +201,20 @@ car = new Layer
 	x: 500
 	html: "🚗 "
 	opacity: 0
- 
+
+karte.visible = false
+karte.bringToFront()
+karte.x = 195
+karte.y = 340
+karteanimation = new Animation karte,
+	x: 500
+	y: gridp
+	scale: 10
+	#height: 360
+	options:
+		curve: "ease"
+		time: 0.6
+
 caranimation = new Animation car,
 	x: 0
 	options:
@@ -249,6 +263,7 @@ checkend = (time,end) ->
 	if time > end
 		htwbg.opacity = 1
 		htwframe = true
+		beginning = false
 		htwi.opacity = 1
 		ldown(htwinfo)
 		tintit.start()
