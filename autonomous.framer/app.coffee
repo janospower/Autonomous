@@ -194,7 +194,7 @@ recognizer.onresult = (event) ->
 		when htwframe && info then sprich("Vor etwas mehr als hundert Jahren war Oberschöneweide eines der Gründungszentren der Berliner Industrie.", false)
 		when htwframe && bild then karte.visible = true; karteanimation.start(); karte.bringToFront(); sprich("Dieses Bild ist eine Karte von Oberschöneweide aus dem Jahr 1935",false)
 		when htwframe && rbild then rkarteanimation.start()
-		when htwframe && look then sprich("Ok, die Fahrt wurde pausiert. Du kannst jetzt aussteigen und dir das Gebäude genauer anschauen.", false); lookVideo.visible = true; lookVideo.player.play(); htwi.visible = false; htwbg.visible = false; htwinfo.visible = false
+		when htwframe && look then sprich("Ok, die Fahrt wurde pausiert. Du kannst jetzt aussteigen und dir das Gebäude genauer anschauen.", false); lookVideo.visible = true; lookVideo.player.play(); htwi.visible = false; htwbg.visible = false; htwinfo.visible = false; tint.visible = false; cockpit.visible = false
 		else noCompSound.play(); sprich(noComp, false); ccolor = "#D0021B" #true?
 	return
 
