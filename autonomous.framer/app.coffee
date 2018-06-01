@@ -179,7 +179,7 @@ recognizer.onresult = (event) ->
 		when stop then sprich(rcancel, false); car.animateStop(); tourVideo.player.pause()
 		when start then sprich(rbegin, false); caranimation.start(); tourVideo.player.play()
 		when htwframe && info then sprich("Vor etwas mehr als hundert Jahren war Oberschöneweide eines der Gründungszentren der Berliner Industrie. Hier an der Rathenaustraße stiegen täglich Tausende von Arbeitern aus den Straßenbahnen, strömten in die dicht gedrängten, mit gelbem Klinker versehenen Fabrikanlagen entlang der Wilhelminenhofstraße und fertigten Kabel, montierten Autos oder entwarfen Sendeanlagen.", false)
-		when htwframe && bild then karteanimation.start(); karte.bringToFront(); karte.parent
+		when htwframe && bild then karte.visible = true; karteanimation.start(); karte.bringToFront(); karte.parent
 		else noCompSound.play(); sprich(noComp, false); ccolor = "#D0021B" #true?
 	return
 
@@ -207,9 +207,9 @@ karte.bringToFront()
 karte.x = 195
 karte.y = 340
 karteanimation = new Animation karte,
-	x: 500
-	y: gridp
-	scale: 10
+	x: 500-gridp
+	y: 0
+	scale: 6
 	#height: 360
 	options:
 		curve: "ease"
